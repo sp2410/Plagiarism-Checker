@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'uri'
 require 'net/http'
-require 'pry'
+require 'pry' if development?
 
 class PlagChecker < Sinatra::Base
   configure :development do
@@ -25,6 +25,6 @@ post '/check' do
   request.set_form form_data, 'multipart/form-data'
   response = https.request request
   @body = JSON response.read_body
-  
+
   erb :index, locals: {body: @body}
 end
