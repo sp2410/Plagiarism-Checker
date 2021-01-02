@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <% unless @body.empty? %>
+    <% if @body["plagPercent"]==0 %>
+      <p>0% plagiarism</p>
+    <% end %>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= @body["plagPercent"] %>"
+      aria-valuemin="0" aria-valuemax="100" style="width:<%= @body["plagPercent"] %>%">
+        <%= @body["plagPercent"] %>%
+      </div>
+    </div>
+    <% @body["details"].each do |detail|%>
+      <div class="row">
+        <div class="card col-sm m-3" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-text"><%= detail["query"]%></p>
+            <a target="_blank" rel="noopener noreferrer" href=<%= detail["display"]["url"] if detail["display"]%>>
+              <p class="card-text"><%= detail["display"]["url"] if detail["display"]%></p>
+            </a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%else%>
+    <p>Crickets!</p>
+    <p> No match found </p>
+  <%end%>
+</div>
