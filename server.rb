@@ -21,7 +21,7 @@ post '/check' do
   https = Net::HTTP.new url.host, url.port;
   https.use_ssl = true
   request = Net::HTTP::Post.new url
-  form_data = [['key', ENV['API_KEY'],['data', data]]
+  form_data = [['key', ENV["API_KEY"],['data', data]]
   request.set_form form_data, 'multipart/form-data'
   response = https.request request
   @body = JSON response.read_body
